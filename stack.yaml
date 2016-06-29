@@ -1,0 +1,9 @@
+resolver: lts-6.1
+
+packages:
+- .
+- ../NSSpeechRecognizer
+
+extra-deps:
+- NSSpeechRecognizer-0.0.0
+
