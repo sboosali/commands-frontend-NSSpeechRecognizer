@@ -14,6 +14,13 @@ import Control.Arrow as X ((>>>))
 import Data.Function as X ((&))
 import Data.Foldable as X (traverse_)
 
+import Pipes (Producer, yield)
+
+import Control.Concurrent.STM (TChan,atomically, readTChan)
+import Control.Concurrent (threadDelay)
+import Control.Monad.IO.Class (liftIO)
+import Control.Monad (forever)
+
 nothing :: (Monad m) => m ()
 nothing = return ()
 
@@ -25,4 +32,14 @@ either2maybe = either (const Nothing) Just
 
 either2bool :: Either e a -> Bool
 either2bool = either (const False) (const True)
+
+channel2producer :: TChan a -> Producer a IO r
+channel2producer channel = forever $ do
+  a <- liftIO $ atomically $ readTChan channel
+  yield a
+
+-- | busy wait, awaken every second.
+hang :: IO a
+hang = forever $
+   threadDelay 1000000
 

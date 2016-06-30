@@ -61,14 +61,15 @@ library
  build-depends:
                base >=4.7 && <5
 
---              , transformers
---              , mtl
+             , transformers
+             , mtl
 --              , containers
 --              , bytestring
---              , stm
+             , stm
 --              , template-haskell
 
              , NSSpeechRecognizer
+             , commands-core
 
              , deepseq
              , hashable
