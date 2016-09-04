@@ -32,7 +32,7 @@ main = do
  asleepState = defaultRecognizerState { rVocabulary = asleepVocabulary }
  awakeState  = defaultRecognizerState { rVocabulary = awakeVocabulary  }
 
- useRecognition :: P'NSSpeechRecognizer -> Consumer String IO ()
+ useRecognition :: P'NSSpeechRecognizer -> Consumer String IO r
  useRecognition p'NSSpeechRecognizer = forever $ do
   recognition <- await
   liftIO $ putStr "[recognized] "
